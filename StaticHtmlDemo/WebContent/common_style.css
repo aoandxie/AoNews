@@ -1,0 +1,102 @@
+@CHARSET "UTF-8";
+*{
+	margin: 0;
+	border: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+	background-color: #F0FFFF;
+}
+
+.LoginForm{
+	position: fixed;
+	background-color: #FFFFFF;
+	left: 35%;
+	top: 30%;
+	border-radius: 5px;
+	border-width: 2px;
+	border-color: #000000;
+	border-style: solid;
+	padding: 1em;
+}
+
+.LoginForm label{
+	font-size: 2em;
+	margin-right: 1em;
+}
+
+.LoginForm input{
+	height: 2em;
+	width: 60%;
+	font-size: 1em;
+	border-style: groove;
+	border-width: 2px;
+	border-color: #000000;
+}
+
+.LoginButton{
+	text-align: center;
+	margin: 1em;
+} 
+
+.LoginButton input{
+	width: 4em;
+}
+
+.Top{
+	position: fixed;
+	height: 4em;
+	background-color: #2e3436;
+	width: 100%;
+	text-align: center;
+	z-index: 255;
+}
+
+.Top a{
+	position: relative;
+	float: left;
+	display: block;
+	width: 7%;
+	height: 100%;
+	margin: 0 7%;
+	text-decoration: none;
+	font-size: 2em;
+	color: #FFFFFF;
+}
+
+.Top a:HOVER {
+	background-color: #000000;
+}
+
+.News{
+	position: relative;
+	top: 5em;
+	column-width: 250px;
+	column-gap: 5px;
+	text-align: center;
+	margin-left: 5px;
+}
+
+.News a{
+	color: #201f35;
+	display: block;
+	border-radius: 5px;
+	border-width: 2px;
+	border-color: #555753;
+	border-style: solid;
+	font-size: 2em;
+	width: 250px;
+	margin: 5px 0;
+	text-decoration: none;
+}
+
+.News a:CHECKED{
+	color: #201f35;
+}
+
+.News a:HOVER{
+	background-color: #000000;
+	color: #FFFFFF;
+}
