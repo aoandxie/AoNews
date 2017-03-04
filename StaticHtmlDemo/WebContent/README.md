@@ -1,1 +1,1 @@
-# StaticHtmlDemo>WebContent: Static html document & stylesheet document
+# Static html document & stylesheet document
