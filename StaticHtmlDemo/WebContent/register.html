@@ -13,7 +13,7 @@
 		if (new_user.value.match("^([a-z]|[A-Z]|[0-9]){1,20}") != null) {
 			if (new_email.value.match("^.+@.+") != null) {
 				if (new_pswd.value.match("^.{6,20}") != null) {
-					if (same_pswd.value == new_pswd) {
+					if (same_pswd.value == new_pswd.value) {
 						return true;
 					} else {
 						new_pswd.value = same_pswd.value = "";
@@ -40,16 +40,16 @@
 <body>
 	<div class="Canvas">
 		<div class="Form">
-			<form action="index.html" method="get">
+			<form action="Register" method="post">
 				<label>用户名</label><input type="text" id="Username" name="new_user"
-					autofocus="autofocus" placeholder="1-20个大小写字母或数字"><br> <label>邮箱</label><input
-					type="text" name="new_email" id="Useremail"><br> <label>密码</label><input
-					type="password" name="new_pswd" id="pswd1" placeholder="6-20个字符"><br> <label>确认密码</label><input
+					autofocus="autofocus" placeholder="1-20个大小写字母或数字"><br>
+				<label>邮箱</label><input type="text" name="new_email" id="Useremail"><br>
+				<label>密码</label><input type="password" name="new_pswd" id="pswd1"
+					placeholder="6-20个字符"><br> <label>确认密码</label><input
 					type="password" name="same_pswd" id="pswd2"><br>
 				<div class="Button">
-					<input type="submit" value="注册"
-						onclick="return infoVerify();"> <input
-						type="submit" formaction="index.html" value="返回登录">
+					<input type="submit" value="注册" onclick="return infoVerify();">
+					<input type="submit" formaction="index.html" value="返回登录">
 				</div>
 			</form>
 		</div>
