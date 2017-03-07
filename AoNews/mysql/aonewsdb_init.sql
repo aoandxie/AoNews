@@ -28,9 +28,9 @@ create table Keyword(
 # Publish time( yyyy-mm-dd hh:mm:ss )
 create table News(
 	UrlID char(10),
-	Title char(30) not null,
-	SrcWebsite char(10) not null,
-	PublishTime char(20) not null,
+	Title varchar(30) not null,
+	SrcWebsite varchar(50) not null,
+	PublishTime varchar(30) not null,
 	primary key(UrlID)
 )default charset = utf8;
 
@@ -45,7 +45,7 @@ create table UserKeyword(
 
 # News write keyword record
 create table NewsKeyword(
-	UrlID char(20),
+	UrlID char(10),
 	Word char(10),
 	primary key(UrlID,Word),
 	foreign key(UrlID) references News(UrlID),
