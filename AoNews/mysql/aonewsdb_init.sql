@@ -23,16 +23,16 @@ create table Keyword(
 )
 
 # News Info
-# Local url: news/ + UrlID + .html
+# Local url: news/ + NewsID + .html
 # Title less than 30 characters
 # Source web site e.g. 163, tencent
 # Publish time( yyyy-mm-dd hh:mm:ss )
 create table News(
-	UrlID char(10),
-	Title varchar(30),
-	SrcWebsite varchar(50),
+	NewsID char(10),
+	Title varchar(70),
+	SrcWebsite varchar(100),
 	PublishTime varchar(30),
-	primary key(UrlID)
+	primary key(NewsID)
 )
 
 # User read keyword history
@@ -46,19 +46,19 @@ create table UserKeyword(
 
 # News write keyword record
 create table NewsKeyword(
-	UrlID char(10),
+	NewsID char(10),
 	Word char(10),
-	primary key(UrlID,Word),
-	foreign key(UrlID) references News(UrlID),
+	primary key(NewsID,Word),
+	foreign key(NewsID) references News(NewsID),
 	foreign key(Word) references Keyword(Word)
 )
 
 # User read News record
 create table UserNews(
 	UserName char(20),
-	UrlID char(10),
+	NewsID char(10),
 	CallTime timestamp default current_timestamp,
-	primary key(UserName, UrlID),
+	primary key(UserName, NewsID),
 	foreign key(UserName) references Login(UserName),
-	foreign key(UrlID) references News(UrlID)
+	foreign key(NewsID) references News(NewsID)
 )
