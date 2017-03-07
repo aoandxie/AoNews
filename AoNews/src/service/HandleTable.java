@@ -54,4 +54,19 @@ public class HandleTable {
 		else
 			return false;
 	}
+	
+	public static boolean setNews(String id, String title, String src, String time) throws SQLException {
+		init();
+		if (id == null)
+			return false;
+		statement.executeUpdate("insert News value('" + id + "','" + title + "','" + src + "','" + time + "')");
+		return true;
+	}
+	
+	public boolean setNewsKeyword(String id, String word) throws SQLException {
+		if (id == null || word == null)
+			return false;
+		statement.executeUpdate("insert NewsKeyword value('" + id + "','" + word + "')");
+		return true;
+	}
 }
