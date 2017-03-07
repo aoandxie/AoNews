@@ -10,7 +10,7 @@ public class HandleTable {
 	private static String password = ""; // input mysql root password
 	private static Connection connection;
 	private static Statement statement;
-
+	
 	private static void init() {
 		// Load JDBC driver
 		try {
@@ -49,6 +49,9 @@ public class HandleTable {
 	public static boolean login(String name, String pswd) throws SQLException {
 		init();
 		ResultSet rs = statement.executeQuery("select Password from Login where UserName='" + name + "';");
-		return (pswd == rs.getString(0));
+		if(rs.next())
+			return (pswd.equals(rs.getString("Password")));
+		else
+			return false;
 	}
 }
