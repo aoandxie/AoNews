@@ -8,6 +8,7 @@ create database aonews;
 create table Login(
 	UserName char(20),
 	Password char(20) not null,
+	Email char(20) not null,
 	primary key(UserName)
 )default charset = utf8;
 
