@@ -1,0 +1,57 @@
+package register;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@SuppressWarnings("serial")
+@WebServlet("/Register")
+public class Register extends HttpServlet {
+	private String password = "sql979284541";
+	private boolean isDatabaseConnected = true;
+
+	public Register() {
+		// Load JDBC driver
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			isDatabaseConnected = false;
+		}
+		if (isDatabaseConnected) {
+			// Establish connection
+			try {
+				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/aonews", "root", password);
+			} catch (SQLException e) {
+				isDatabaseConnected = false;
+			}
+			if (isDatabaseConnected) {
+				
+			}
+		}
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		out.print(
+				"<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>loading. . .</title></head><body><img src=\"wait.gif\">");
+		if (!isJdbcLoaded) {
+			out.print("与数据库的连接出现问题，注册已终止。");
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}

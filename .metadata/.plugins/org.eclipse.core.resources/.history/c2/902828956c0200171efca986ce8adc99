@@ -1,0 +1,52 @@
+package service;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class HandleTable {
+	private String password = "sql979284541";
+	private Connection connection;
+	private Statement statement;
+
+	{
+		// Load JDBC driver
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println("driver failed");
+			registerFail = true;
+		}
+		if (!registerFail) {
+			// Establish connection
+			try {
+				connection = DriverManager.getConnection("jdbc:mysql://localhost/aonews", "root", password);
+			} catch (SQLException e) {
+				System.out.println("connection failed");
+				registerFail = true;
+			}
+			if (!registerFail) {
+				try {
+					statement = connection.createStatement();
+				} catch (SQLException e) {
+					System.out.println("statement failed");
+					registerFail = true;
+				}
+				if (!registerFail) {
+					String name = request.getParameter("new_user");
+					String email = request.getParameter("new_email");
+					String pswd = request.getParameter("new_pswd");
+					try {
+						statement.addBatch("insert into Login(UserName,Password,Mail) values('" + name + "','" + pswd
+								+ "','" + email + "');");
+					} catch (SQLException e) {
+						System.out.println("write " + name + email + pswd + "failed");
+						registerFail = true;
+					}
+				}
+			}
+		}
+	}
+
+}

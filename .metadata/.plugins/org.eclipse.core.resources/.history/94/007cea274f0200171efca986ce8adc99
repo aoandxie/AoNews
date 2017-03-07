@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ao News 注册</title>
+<link type="text/css" rel="stylesheet" href="common_style.css">
+<script type="text/javascript">
+	function infoVerify() {
+		new_user = document.getElementById("Username");
+		new_email = document.getElementById("Useremail");
+		new_pswd = document.getElementById("pswd1");
+		same_pswd = document.getElementById("pswd2");
+		if (new_user.value.match("^([a-z]|[A-Z]|[0-9]){1,20}") != null) {
+			alert("!!!!");
+			if (new_email.value.match("^.+@.+") != null) {
+				if (new_pswd.value.match("^.{6,20}") != null) {
+					if (same_pswd.value == new_pswd) {
+						return true;
+					} else {
+						new_pswd.value = same_pswd.value = "";
+						return alertReturn(new_pswd, "两次密码输入不一致");
+					}
+				} else {
+					return alertReturn(new_pswd, "密码应为6-20个字符的组合");
+				}
+			} else {
+				return alertReturn(new_email, "邮箱格式不正确");
+			}
+		} else {
+			return alertReturn(new_user, "用户名应为1-20个大小写字母或数字的组合");
+		}
+	}
+
+	function alertReturn(field, text) {
+		alert(text);
+		field.focus();
+		return false;
+	}
+</script>
+</head>
+<body>
+	<div class="Canvas">
+		<div class="Form">
+			<form action="index.html" method="get">
+				<label>用户名</label><input type="text" id="Username" name="new_user"
+					autofocus="autofocus"><br> <label>邮箱</label><input
+					type="text" name="new_email" id="Useremail"><br> <label>密码</label><input
+					type="password" name="new_pswd" id="pswd1"><br> <label>确认密码</label><input
+					type="password" name="same_pswd" id="pswd2"><br>
+				<div class="Button">
+					<input type="submit" value="注册"
+						onclick="return infoVerify();"> <input
+						type="submit" formaction="index.html" value="返回登录">
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

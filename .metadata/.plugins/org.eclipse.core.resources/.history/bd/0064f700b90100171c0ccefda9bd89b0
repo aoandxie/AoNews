@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Ao News 首页</title>
+		<link type="text/css" rel="stylesheet" href="common_style.css">
+	</head>
+	<body>
+		<div class="Top">
+			<ul><a href="" target="_blank">个人</a></ul>
+			<ul class="Now"><a>分类</a></ul>
+		</div>
+	</body>
+</html>

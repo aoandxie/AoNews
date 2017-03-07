@@ -1,0 +1,11 @@
+package service;
+
+import java.sql.Connection;
+import java.sql.Statement;
+
+public class HandleTable {
+	private String password = "sql979284541";
+	private Connection connection;
+	private Statement statement;
+
+}
