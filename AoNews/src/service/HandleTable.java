@@ -46,4 +46,9 @@ public class HandleTable {
 				"insert into Login(UserName,Password,Mail) values('" + name + "','" + pswd + "','" + email + "');");
 	}
 
+	public static boolean login(String name, String pswd) throws SQLException {
+		init();
+		ResultSet rs = statement.executeQuery("select Password from Login where UserName='" + name + "';");
+		return (pswd == rs.getString(0));
+	}
 }
