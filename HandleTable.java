@@ -66,6 +66,7 @@ public class HandleTable {
 	public boolean setNewsKeyword(String id, String word) throws SQLException {
 		if (id == null || word == null)
 			return false;
+		init();
 		statement.executeUpdate("insert NewsKeyword value('" + id + "','" + word + "')");
 		return true;
 	}
