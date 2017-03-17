@@ -1,0 +1,45 @@
+@CHARSET "UTF-8";
+/* common set */
+* {
+	margin: 0;
+	border: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+	background-image: url("back.jpg");
+}
+
+.paper{
+	position: relative;
+	background-color: rgba(255,255,255,0.2);
+	display: block;
+	width: 80%;
+	left: 10%;
+	margin: 50px 0;
+}
+
+.title{
+	border-style: dashed;
+	border-width: 5px;
+	border-radius: 10px;
+	border-color: #000;
+	font-size: 2em;
+	text-align: center;
+}
+
+.mainbody{
+	font-size: 1em;
+	top: 30px;
+	text-align: center;
+}
+
+.mainbody p{
+	text-align: left;
+}
+
+.foot{
+	text-align: right;
+	width: 100%;
+}
