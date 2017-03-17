@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
 
 import service.HandleTable;
+import service.HtmlWriter;
 
 @SuppressWarnings("serial")
 @WebServlet("/Register")
@@ -20,9 +21,9 @@ public class Register extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		out.print(
-				"<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>loading. . .</title></head><body><img src=\"wait.gif\"></body></html>");
-
+		HtmlWriter html = new HtmlWriter("loading. . .");
+		html.setBody("<img src=\"wait.gif\">");
+		out.print(html);
 		String name = request.getParameter("new_user");
 		String email = request.getParameter("new_email");
 		String pswd = request.getParameter("new_pswd");
