@@ -11,7 +11,6 @@ public class NewsHtml extends HtmlWriter {
 
 	public NewsHtml(String title) {
 		super(title);
-		setHead("<link type=\"text/css\" rel=\"stylesheet\" href=\"news_style.css\">");
 		time = srcWeb = "Undefined";
 		mainBody = "";
 	}
@@ -42,6 +41,7 @@ public class NewsHtml extends HtmlWriter {
 
 	@Override
 	public String toString() {
+		setHead("<link type=\"text/css\" rel=\"stylesheet\" href=\"css/news_style.css\">");
 		setBody("<div class=\"paper\"><div class=\"title\"><p>" + getTitle() + "</p></div><div class=\"mainbody\">"
 				+ mainBody + "</div></div><div class=\"foot\"><p>" + srcWeb + "</p><p>" + time + "</p></div>");
 		return super.toString();

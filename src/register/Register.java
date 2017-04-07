@@ -33,10 +33,12 @@ public class Register extends HttpServlet {
 				response.sendRedirect("register.html");
 			} else {
 				HandleTable.register(name, email, pswd);
-				out.print("Register Success");
+				JOptionPane.showMessageDialog(null, "Register Success");
 				response.sendRedirect("index.html");
 			}
 		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Register Fail");
+			response.sendRedirect("index.html");
 			e.printStackTrace();
 		}
 

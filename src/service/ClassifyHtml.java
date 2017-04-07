@@ -22,8 +22,12 @@ public class ClassifyHtml extends HtmlWriter {
 
 	@Override
 	public String toString() {
-		setHead("<link type=\"text/css\" rel=\"stylesheet\" href=\"classify_style.css\">");
+		setHead("<link type=\"text/css\" rel=\"stylesheet\" href=\"css/classify_style.css\">");
 		setBody(body);
 		return super.toString();
+	}
+	
+	public static void main(String[] args) throws SQLException {
+		System.out.print(new ClassifyHtml());
 	}
 }

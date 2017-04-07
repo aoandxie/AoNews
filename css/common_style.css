@@ -15,7 +15,7 @@ a {
 /* Login & Register */
 .Canvas {
 	position: fixed;
-	background-image: url("back.jpg");
+	background-image: url("../res/back.jpg");
 	width: 100%;
 	height: 100%;
 }

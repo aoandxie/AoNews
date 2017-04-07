@@ -35,7 +35,7 @@ public class Login extends HttpServlet {
 				response.sendRedirect("index.html");
 			} else {
 				JOptionPane.showMessageDialog(null, "Login success!");
-				/* 这里应该是生成个人主页的代码，但是未完工 */
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
