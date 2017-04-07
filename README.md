@@ -1,1 +1,1 @@
-# Xie Eclipse Workspace
+# Aonews $Tomcat_Path/Webapp/Aonews/

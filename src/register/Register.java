@@ -15,8 +15,8 @@ import service.HandleTable;
 import service.HtmlWriter;
 
 @SuppressWarnings("serial")
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Register")
+public class Register extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -24,22 +24,24 @@ public class Login extends HttpServlet {
 		HtmlWriter html = new HtmlWriter("loading. . .");
 		html.setBody("<img src=\"wait.gif\">");
 		out.print(html);
-		String name = request.getParameter("user");
-		String pswd = request.getParameter("pswd");
+		String name = request.getParameter("new_user");
+		String email = request.getParameter("new_email");
+		String pswd = request.getParameter("new_pswd");
 		try {
-			if (!HandleTable.isNameExist(name)) {
-				JOptionPane.showMessageDialog(null, "Name not exist");
-				response.sendRedirect("index.html");
-			} else if (!HandleTable.login(name, pswd)) {
-				JOptionPane.showMessageDialog(null, "wrong name || wrong password");
-				response.sendRedirect("index.html");
+			if (HandleTable.isNameExist(name)) {
+				JOptionPane.showMessageDialog(null, "Name has existed");
+				response.sendRedirect("register.html");
 			} else {
-				JOptionPane.showMessageDialog(null, "Login success!");
-				
+				HandleTable.register(name, email, pswd);
+				JOptionPane.showMessageDialog(null, "Register Success");
+				response.sendRedirect("index.html");
 			}
 		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Register Fail");
+			response.sendRedirect("index.html");
 			e.printStackTrace();
 		}
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
