@@ -5,12 +5,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
 public class HandleTable {
-	private static String password = ""; // input mysql root password
+	private static String password; // input mysql root password
 	private static Connection connection;
 	private static Statement statement;
 	
+	@SuppressWarnings("resource")
 	private static void init() {
 		// Load JDBC driver
 		try {
@@ -21,6 +23,8 @@ public class HandleTable {
 		}
 		// Establish connection
 		try {
+			System.out.print("Please Enter password: ");
+			password = new Scanner(System.in).nextLine();
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/aonews", "root", password);
 		} catch (SQLException e) {
 			System.out.println("connection failed");
@@ -63,11 +67,16 @@ public class HandleTable {
 		return true;
 	}
 	
-	public boolean setNewsKeyword(String id, String word) throws SQLException {
+	public static boolean setNewsKeyword(String id, String word) throws SQLException {
 		if (id == null || word == null)
 			return false;
 		init();
 		statement.executeUpdate("insert NewsKeyword value('" + id + "','" + word + "')");
 		return true;
+	}
+	
+	public static ResultSet getKeyword() throws SQLException{
+		init();
+		return statement.executeQuery("select Word from Keyword");
 	}
 }
