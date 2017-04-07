@@ -53,3 +53,7 @@ a {
 	border-radius: 10px;
 	background-color: silver;
 }
+
+.ClassBox a:hover {
+	background-color: grey;
+}
