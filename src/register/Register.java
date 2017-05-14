@@ -22,7 +22,7 @@ public class Register extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		HtmlWriter html = new HtmlWriter("loading. . .");
-		html.setBody("<img src=\"wait.gif\">");
+		html.setBody("<img src=\"res\\wait.gif\">");
 		out.print(html);
 		String name = request.getParameter("new_user");
 		String email = request.getParameter("new_email");
