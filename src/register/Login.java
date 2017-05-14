@@ -22,7 +22,7 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		HtmlWriter html = new HtmlWriter("loading. . .");
-		html.setBody("<img src=\"wait.gif\">");
+		html.setBody("<img src=\"res\\wait.gif\">");
 		out.print(html);
 		String name = request.getParameter("user");
 		String pswd = request.getParameter("pswd");
