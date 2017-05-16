@@ -8,6 +8,10 @@
         <servlet-name>Register</servlet-name>
         <servlet-class>register.Register</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReadNews</servlet-name>
+        <servlet-class>news.ReadNews</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -16,5 +20,9 @@
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReadNews</servlet-name>
+        <url-pattern>/ReadNews</url-pattern>
     </servlet-mapping>
 </web-app>
