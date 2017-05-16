@@ -42,51 +42,55 @@ public class ReadNews extends HttpServlet {
 		// 设置返回的编码集
 		resp.setContentType("text/html; charset=utf8");
 
-		if (!imgPath.isDirectory() && !textPath.isDirectory()) {
-			JOptionPane.showMessageDialog(null, "文件夹不存在"); // 确定Img或Text文件夹在指定目录下存在
-		} else {
-			// 读取Img与Text目录下的文件名
-			String[] imgList = imgPath.list();
-			String[] textList = textPath.list();
+		// 读取Img目录下的文件名
+		String[] imgList = {};
+		if (imgPath.isDirectory()) {
+			imgList = imgPath.list();
+		}
 
-			// 循环跳跃判定
-			boolean found = false;
+		// 读取Text目录下的文件名
+		String[] textList = {};
+		if (textPath.isDirectory()) {
+			textList = textPath.list();
+		}
 
-			// 循环搜索文件或者图片
-			for (int i = 0; i < imgList.length + textList.length; i++) {
-				// 图片区
-				for (String img : imgList)
-					if (img.matches(i + ".*")) {
-						html.addImgBody("MyCrawl/" + newsid + "/Img/" + img);
-						found = true;
-						break;
-					}
-				if (found) {
-					found = false;
-					continue;
+		// 循环跳跃判定
+		boolean found = false;
+
+		// 循环搜索文件或者图片
+		for (int i = 0; i < imgList.length + textList.length; i++) {
+			// 图片区
+			for (String img : imgList)
+				if (img.matches(i + ".*")) {
+					html.addImgBody("MyCrawl/" + newsid + "/Img/" + img);
+					found = true;
+					break;
 				}
+			if (found) {
+				found = false;
+				continue;
+			}
 
-				// 文件区
-				for (String text : textList)
-					if (text.matches(i + "[.].*")) {
-						File textFile = new File(textPath + "/" + text);
-						if (!textFile.isFile()) {
-							JOptionPane.showMessageDialog(null, "文件不存在");
-						} else {
-							BufferedReader inBr = new BufferedReader(new FileReader(textFile));
-							String line;
-							while ((line = inBr.readLine()) != null) {
-								html.addTextBody(line);
-							}
-							inBr.close();
+			// 文件区
+			for (String text : textList)
+				if (text.matches(i + "[.].*")) {
+					File textFile = new File(textPath + "/" + text);
+					if (!textFile.isFile()) {
+						JOptionPane.showMessageDialog(null, "部分内容无法显示");
+					} else {
+						BufferedReader inBr = new BufferedReader(new FileReader(textFile));
+						String line;
+						while ((line = inBr.readLine()) != null) {
+							html.addTextBody(line);
 						}
-						found = true;
-						break;
+						inBr.close();
 					}
-				if (found) {
-					found = false;
-					continue;
+					found = true;
+					break;
 				}
+			if (found) {
+				found = false;
+				continue;
 			}
 		}
 		PrintWriter out = resp.getWriter();
