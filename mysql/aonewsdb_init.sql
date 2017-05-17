@@ -1,64 +1,49 @@
 # Environment: mysql
-# create schema
+drop database if exists aonews;
 create database aonews default charset = utf8;
 use aonews;
 
-# Login Info
-# UserName less than 20 characters
-# Password less than 20 characters
-create table Login(
-	UserName char(20),
-	Password char(20),
-	Mail varchar(50),
-	primary key(UserName)
-)
+drop table if exists User;
+drop table if exists Keyword;
+drop table if exists News;
+drop table if exists Interest;
+drop table if exists History;
 
-# Keyword Info
-# Word less than 10 characters
-# HotIndex >= && HotIndex <= 255
+create table User(
+	loginId char(20),
+	pswd char(20),
+	mail varchar(50),
+	primary key(loginId)
+);
+
 create table Keyword(
-	Word char(10),
-	HotIndex int unsigned,
-	primary key(Word)
-)
+	word char(10),
+	primary key(word)
+);
 
-# News Info
-# Local url: news/ + NewsID + .html
-# Title less than 30 characters
-# Source web site e.g. 163, tencent
-# Publish time( yyyy-mm-dd hh:mm:ss )
 create table News(
-	NewsID char(10),
-	Title varchar(70),
-	SrcWebsite varchar(100),
-	PublishTime varchar(30),
-	primary key(NewsID)
-)
+	newsId char(10),
+	title varchar(70),
+	srcUrl varchar(100),
+	srcTime varchar(30),
+	word char(10) null,
+	primary key(newsId),
+	foreign key(word) references Keyword(word)
+);
 
-# User read keyword history
-create table UserKeyword(
-	UserName char(20),
-	Word char(10),
-	primary key(UserName,Word),
-	foreign key(UserName) references Login(UserName),
-	foreign key(Word) references Keyword(Word)
-)
+create table Interest(
+	uid char(20),
+	word char(10),
+	primary key(uid,word),
+	foreign key(uid) references User(loginId),
+	foreign key(word) references Keyword(word)
+);
 
-# News write keyword record
-create table NewsKeyword(
-	NewsID char(10),
-	Word char(10),
-	primary key(NewsID,Word),
-	foreign key(NewsID) references News(NewsID),
-	foreign key(Word) references Keyword(Word)
-)
-
-# User read News record
-create table UserNews(
-	UserName char(20),
-	NewsID char(10),
-	CallTime timestamp default current_timestamp,
-	primary key(UserName, NewsID),
-	foreign key(UserName) references Login(UserName),
-	foreign key(NewsID) references News(NewsID)
-)
+create table History(
+	uid char(20),
+	nid char(10),
+	uTime timestamp default current_timestamp,
+	primary key(uid, nid, uTime),
+	foreign key(uid) references User(loginId),
+	foreign key(nid) references News(newsId)
+);

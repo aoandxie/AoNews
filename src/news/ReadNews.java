@@ -1,3 +1,4 @@
+/*这是看某个具体的新闻的地方，通过ReadNews?newsid=来访问*/
 package news;
 
 import java.io.BufferedReader;
@@ -5,35 +6,66 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
 
+import register.Faction;
+import service.HandleTable;
 import service.NewsHtml;
 
 @SuppressWarnings("serial")
 public class ReadNews extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		/*******************************/
-		/* 标题我是不知道的，所以随便打了一个 */
-		/*******************************/
-		NewsHtml html = new NewsHtml("need to select from database");
+		Cookie[] cookies = req.getCookies();
 
-		/******************************************************/
-		/*
-		 * 读取localhost:8080/AoNews/ReadNews?newsid=后面的那部分 后期应该修改为相应的数据库主键
-		 * 暂时先直接输入新闻目录下的文件夹
-		 */
-		/******************************************************/
+		String name = null; // 即用户登录的id
+		try {
+			name = Faction.checkCookies(cookies);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "数据库正在紧急施工");
+			resp.sendRedirect("index.html");
+		}
+
 		String newsid = req.getParameter("newsid");
 
-		/**********************************************/
+		if (name != null) {
+			try {
+				HandleTable.setHistory(name, newsid);
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+
+		/*********************************/
+		/* 标题我是不知道的，所以随便打了一个 */
+		/*********************************/
+		NewsHtml html;
+		try {
+			html = new NewsHtml(HandleTable.getNewsTitle(newsid));
+		} catch (SQLException e) {
+			html = new NewsHtml("我们也不知道这个新闻的标题");
+		}
+		try {
+			html.setSrcWeb(HandleTable.getNewsSrcUrl(newsid));
+		} catch (SQLException e) {
+			html.setSrcWeb("我们也不知道这个新闻从哪来的");
+		}
+		try {
+			html.setTime(HandleTable.getNewsSrcTime(newsid));
+		} catch (SQLException e) {
+			html.setTime("我们也不知道这个新闻什么时候的");
+		}
+
+		/************************************************/
 		/* 图片以及文字路径，暂时没有合成一个，可以在这里改一下 */
-		/**********************************************/
+		/************************************************/
 		File imgPath = new File(
 				"/home/xmingest/apache/apache-tomcat-6.0.53/webapps/AoNews/MyCrawl/" + newsid + "/Img/");
 		File textPath = new File(

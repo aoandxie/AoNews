@@ -7,13 +7,8 @@
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-body{
-	background-image: url("../res/back.jpg");
-}
-
 .paper{
 	position: relative;
-	background-color: rgba(255,255,255,0.2);
 	display: block;
 	width: 80%;
 	left: 10%;
@@ -37,6 +32,7 @@ body{
 
 .mainbody p{
 	text-align: left;
+	margin: 20px 0;
 }
 
 .foot{

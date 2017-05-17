@@ -9,8 +9,28 @@
         <servlet-class>register.Register</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Faction</servlet-name>
+        <servlet-class>register.Faction</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetFinish</servlet-name>
+        <servlet-class>register.SetFinish</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ReadNews</servlet-name>
         <servlet-class>news.ReadNews</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Classify</servlet-name>
+        <servlet-class>news.Classify</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>List</servlet-name>
+        <servlet-class>news.List</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetInterest</servlet-name>
+        <servlet-class>news.SetInterest</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -24,5 +44,25 @@
     <servlet-mapping>
         <servlet-name>ReadNews</servlet-name>
         <url-pattern>/ReadNews</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Classify</servlet-name>
+        <url-pattern>/Classify</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faction</servlet-name>
+        <url-pattern>/Faction</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>List</servlet-name>
+        <url-pattern>/List</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetFinish</servlet-name>
+        <url-pattern>/SetFinish</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetInterest</servlet-name>
+        <url-pattern>/SetInterest</url-pattern>
     </servlet-mapping>
 </web-app>

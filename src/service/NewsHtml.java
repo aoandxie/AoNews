@@ -1,13 +1,10 @@
+/*主要为ReadNews生成html*/
 package service;
 
 public class NewsHtml extends HtmlWriter {
 	private String time;
 	private String srcWeb;
 	private String mainBody;
-
-	public NewsHtml() {
-		this("Unnamed News");
-	}
 
 	public NewsHtml(String title) {
 		super(title);
@@ -16,11 +13,11 @@ public class NewsHtml extends HtmlWriter {
 	}
 
 	public void addTextBody(String text) {
-		mainBody = mainBody + "<p>" + text + "</p>";
+		mainBody = mainBody + "<p>" + super.escapeCharacter(text) + "</p>";
 	}
 
 	public void addImgBody(String src) {
-		mainBody = mainBody + "<img src=\"" + src + "\">";
+		mainBody = mainBody + "<img src=\"" + super.escapeCharacter(src) + "\">";
 	}
 
 	public String getTime() {
@@ -28,7 +25,7 @@ public class NewsHtml extends HtmlWriter {
 	}
 
 	public void setTime(String time) {
-		this.time = time;
+		this.time = super.escapeCharacter(time);
 	}
 
 	public String getSrcWeb() {
@@ -36,14 +33,16 @@ public class NewsHtml extends HtmlWriter {
 	}
 
 	public void setSrcWeb(String srcWeb) {
-		this.srcWeb = srcWeb;
+		this.srcWeb = super.escapeCharacter(srcWeb);
 	}
 
 	@Override
 	public String toString() {
-		setHead("<link type=\"text/css\" rel=\"stylesheet\" href=\"css/news_style.css\">");
-		setBody("<div class=\"paper\"><div class=\"title\"><p>" + getTitle() + "</p></div><div class=\"mainbody\">"
-				+ mainBody + "</div></div><div class=\"foot\"><p>" + srcWeb + "</p><p>" + time + "</p></div>");
+		setHead("<link type=\"text/css\" rel=\"stylesheet\" href=\"css/topbar.css\"><link type=\"text/css\" rel=\"stylesheet\" href=\"css/news.css\">");
+		// 回到首页
+		setBody("<div class=\"Top\"><ul><a href=\"\">个人</a></ul><ul class=\"Now\"><a>新闻</a></ul>	</div><div class=\"paper\"><div class=\"title\"><p>"
+				+ getTitle() + "</p></div><div class=\"mainbody\">" + mainBody + "</div></div><div class=\"foot\"><p>"
+				+ srcWeb + "</p><p>" + time + "</p></div>");
 		return super.toString();
 	}
 }

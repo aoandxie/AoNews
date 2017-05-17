@@ -1,33 +1,26 @@
+/*主要为Classify生成html*/
 package service;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class ClassifyHtml extends HtmlWriter {
-	private String body;
+	private String body1;
+	private String body2;
+	private String kwlist;
 
-	public ClassifyHtml() throws SQLException {
-		super("News Type");
-		body = "<div class=\"Top\"><ul><a href=\"faction_demo.html\">个人</a></ul><ul class=\"Now\"><a>分类</a></ul></div>	<div class=\"ClassBoxContainer\">";
-		ResultSet kwRst = HandleTable.getKeyword();
-		while (kwRst.next()) {
-			addKeyword(kwRst.getString("Word"));
-		}
-		body += "</div>";
+	public ClassifyHtml() {
+		super("关键词");
+		body1 = "<div class=\"Top\"><ul><a href=\"Faction\">个人</a></ul><ul class=\"Now\"><a>关键词</a></ul></div><div class=\"ClassBoxContainer\">";
+		body2 = "</div>";
+		kwlist = "";
 	}
 
-	private void addKeyword(String keyword) {
-		body += "<div class=\"ClassBox\"><a>" + keyword + "</a></div>";
+	public void addKeyword(String keyword) {
+		kwlist += "<div class=\"ClassBox\"><a href=\"List?kywd=" + keyword + "\">" + keyword + "</a></div>";
 	}
 
 	@Override
 	public String toString() {
-		setHead("<link type=\"text/css\" rel=\"stylesheet\" href=\"css/classify_style.css\">");
-		setBody(body);
+		setHead("<link type=\"text/css\" rel=\"stylesheet\" href=\"css/topbar.css\"><link type=\"text/css\" rel=\"stylesheet\" href=\"css/classify.css\">");
+		setBody(body1 + kwlist + body2);
 		return super.toString();
-	}
-	
-	public static void main(String[] args) throws SQLException {
-		System.out.print(new ClassifyHtml());
 	}
 }

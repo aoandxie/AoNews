@@ -7,18 +7,17 @@ public class HtmlWriter {
 	private String title;
 	private String head;
 	private String body;
-	
+
 	public HtmlWriter() {
 		this("Unnamed Html");
 	}
-	
+
 	public HtmlWriter(String title) {
 		this.title = title;
 		head = "";
 		body = "";
 		esChar = new HashMap<String, String>();
 		esChar.put("\"", "&quot;");
-		esChar.put("&", "&amp;");
 		esChar.put("<", "&lt;");
 		esChar.put(">", "&gt;");
 	}
@@ -47,15 +46,21 @@ public class HtmlWriter {
 	public void setBody(String body) {
 		this.body = body;
 	}
-	
-	public String escapeCharacter(String words, String oldCharacter) {
-		if(esChar.containsKey(oldCharacter))
-			words.replaceAll(oldCharacter, esChar.get(oldCharacter));
+
+	public String escapeCharacter(String words) {
+		if(words == null)
+			return null;
+		for (String ch : esChar.keySet()) {
+			if (words.contains(ch))
+				words.replaceAll(ch, esChar.get(ch));
+		}
 		return words;
 	}
-	
+
 	@Override
 	public String toString() {
-		return ("<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>" + getTitle() + "</title>" + getHead() + "</head><body>" + getBody() + "</body></html>");
+		String html = "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>" + title + "</title>" + head
+				+ "</head><body>" + body + "</body></html>";
+		return html;
 	}
 }
